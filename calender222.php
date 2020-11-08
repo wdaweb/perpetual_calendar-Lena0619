@@ -4,35 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <style>
 table, td {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-collapse: collapse;
     text-align: center;
+    vertical-align: top;
     margin: 0 auto;
+    width:100%;
+    height:100%;
 }
 
 td {
     width:70px;
-    height:70px;
+    height:90px;
+}
+
+th {
+    padding: 30px 0;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .container {
-    margin: 0 auto;
-    padding:0;
+    margin: 100px auto;
+    min-width: 300px;
+    max-width: 700px;
+    border: 1px solid black;
+    padding: 40px;
+    padding-top: 20px;
+ 
 }
 
-.today .button {
-    display: flex;
-    justify-content: center;
-}
-
-.button {
-    display:flex;
-    justify-content:space-around;
+.sel {
+    text-align: center;
 }
 
 
@@ -105,29 +116,32 @@ if($weekOfFirstDay + $monthTotalDates <= 28) {     //定義一個月有幾周
 ?>
 
 <div class="container">
-    <!-- 顯示當日日期(m-Y) -->
-    <?php
-    echo $em." ".$year;   
-    ?>
-    
+
+
     <!-- 跳月跳年按鈕 -->
-    <div class="button">    
-    <a href="?year=<?= $prevYear ?>&month=<?= $prevMonth ?>">上月</a>
-    <a href="?year=<?= $year - 1?>&month=<?= $month ?>">上年</a>
-    <a href="?year=<?= $nextYear ?>&month=<?= $nextMonth ?>">下月</a>
-    <a href="?year=<?= $year + 1?>&month=<?= $month ?>">下年</a>
+  <div class="sel row">    
+    <div class="col-2"><a href="?year=<?= $prevYear ?>&month=<?= $prevMonth ?>"><i class="fas fa-angle-left"></i>上月</a></div>
+    <div class="col-2"><a href="?year=<?= $year - 1?>&month=<?= $month ?>"><i class="fas fa-angle-double-left"></i>上年</a></div>
+    <div class="col">
+    <!-- 顯示當日日期(m-Y) -->
+      <?php
+      echo $em." ".$year;   
+      ?>
     </div>
+    <div class="col-2"><a href="?year=<?= $year + 1?>&month=<?= $month ?>">下年<i class="fas fa-angle-double-right"></i></a></div>
+    <div class="col-2"><a href="?year=<?= $nextYear ?>&month=<?= $nextMonth ?>">下月<i class="fas fa-angle-right"></i></a></div>
+   </div>
     
     <!-- 年曆主體 -->
     <table>
     <tr>
-        <td>Su</td>
-        <td>Mo</td>
-        <td>Tu</td>
-        <td>We</td>
-        <td>Th</td>
-        <td>Fr</td>
-        <td>Sa</td>
+        <th>Su</th>
+        <th>Mo</th>
+        <th>Tu</th>
+        <th>We</th>
+        <th>Th</th>
+        <th>Fr</th>
+        <th>Sa</th>
     </tr>
     <?php
     for($i=0; $i<$week; $i++){
