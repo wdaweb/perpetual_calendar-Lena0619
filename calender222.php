@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Trispace:wght@500&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 
 <style>
+body {
+    font-family: 'Trispace', sans-serif;
+}
+
 table, td {
     /* border: 1px solid black; */
     border-collapse: collapse;
@@ -28,26 +33,45 @@ th {
     padding: 30px 0;
 }
 
+a{
+    color: #a7a2a2; 
+    font-size: 0.8rem;
+}
+
 a:hover {
     text-decoration: none;
+    color: #ffc107;
 }
 
 .container {
     margin: 100px auto;
-    min-width: 300px;
+    min-width: 400px;
     max-width: 700px;
-    border: 1px solid black;
-    padding: 40px;
-    padding-top: 20px;
- 
+    border: 2px solid #7d7f82;
+    box-shadow: 2px 2px 10px 2px gray;
+    padding: 20px 40px;
 }
 
 .sel {
     text-align: center;
 }
 
+.todayColor {
+    background: #f38080;
+    box-shadow: 1px 1px 5px 5px #f18989;
+    color: white;
+    border-radius: 50px;
+}
 
+.otherMonth {
+    color: #b1b9c1;
+}
 
+.holiday {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #14abe8;
+}
 </style>
 
 <body>
@@ -98,7 +122,6 @@ if($weekOfFirstDay + $monthTotalDates <= 28) {     //定義一個月有幾周
     $week = 6;
 }
 
-
 //定義跳月邏輯
  $prevMonth = $month - 1;  //上月
  $prevYear = $year;
@@ -114,10 +137,24 @@ if($weekOfFirstDay + $monthTotalDates <= 28) {     //定義一個月有幾周
      $nextYear = $year +1;
  }
 ?>
+<?php
+$holiday=[
+    '1-1'=>'元旦',
+    '2-28'=>'和平紀念',
+    '3-8'=>'婦女節',
+    '4-4'=>'兒童節',
+    '5-1'=>'勞動節',
+    '9-3'=>'軍人節',
+    '9-28'=>'教師節',
+    '8-8'=>'父親節',
+    '10-10'=>'國慶日',
+    '10-25'=>'光復節',
+    '11-12'=>'國父誕辰',
+    '12-25'=>'聖誕節',
+];
+?>
 
 <div class="container">
-
-
     <!-- 跳月跳年按鈕 -->
   <div class="sel row">    
     <div class="col-2"><a href="?year=<?= $prevYear ?>&month=<?= $prevMonth ?>"><i class="fas fa-angle-left"></i>上月</a></div>
@@ -148,15 +185,20 @@ if($weekOfFirstDay + $monthTotalDates <= 28) {     //定義一個月有幾周
         echo "<tr>";
         for($j=0; $j<7; $j++){
             if($year==date("Y") && $month==date("m") && (($i*7)+($j+1))==date("j")){
-                echo "<td style='background:lightgray;'>". date("j");
+                echo "<td class='todayColor'>". date("j");
             } else if ($i==0 && $j<$weekOfFirstDay) {
-                echo "<td>".($j + 1 - $weekOfFirstDay + $prevdays);
+                echo "<td class='otherMonth'>".($j + 1 - $weekOfFirstDay + $prevdays);
             } else if (($i*7)+($j+1) - $weekOfFirstDay > $monthTotalDates) {
-                echo "<td>".($j - $weekOfLastDay);
+                echo "<td class='otherMonth'>".($j - $weekOfLastDay);
             } else {
                 echo "<td>" . (($i*7)+($j+1)-$weekOfFirstDay);
             }
-            echo "</td>";
+            
+            if (!empty($holiday[$month . "-" . (($i*7)+($j+1)-$weekOfFirstDay)])) {
+                echo "<br><div class='holiday'>" . $holiday[$month . "-" . (($i*7)+($j+1)-$weekOfFirstDay)] . "</div>";
+              };
+              
+              echo "</td>";
         }
         echo "</tr>";
     }
