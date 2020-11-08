@@ -12,6 +12,7 @@
 <style>
 body {
     font-family: 'Trispace', sans-serif;
+    background: #545050;
 }
 
 table, td {
@@ -20,12 +21,15 @@ table, td {
     text-align: center;
     vertical-align: top;
     margin: 0 auto;
-    width:100%;
     height:100%;
 }
 
+table {
+    padding: 20px;
+}
+
 td {
-    width:70px;
+    width:80px;
     height:90px;
 }
 
@@ -45,20 +49,25 @@ a:hover {
 
 .container {
     margin: 100px auto;
-    min-width: 400px;
-    max-width: 700px;
+    min-width: 750px;
+    
     border: 2px solid #7d7f82;
-    box-shadow: 2px 2px 10px 2px gray;
-    padding: 20px 40px;
+    box-shadow: 2px 2px 20px 2px gray;
+    /* padding: 0px 40px; */
+    padding-left: 0px;
+  
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
 }
 
 .sel {
     text-align: center;
+    padding: 30px 0;
 }
 
 .todayColor {
-    background: #f38080;
-    box-shadow: 1px 1px 5px 5px #f18989;
+    background-color: #ecc1c1;
     color: white;
     border-radius: 50px;
 }
@@ -72,6 +81,14 @@ a:hover {
     font-weight: 700;
     color: #14abe8;
 }
+
+.sideBar {
+    float: left;
+    height:100%;
+    width: 40%;
+    overflow: hidden;
+}
+
 </style>
 
 <body>
@@ -155,6 +172,13 @@ $holiday=[
 ?>
 
 <div class="container">
+
+  <div class="sideBar">
+     <img src="https://picsum.photos/500/700/?random=1">
+  </div>
+
+
+
     <!-- 跳月跳年按鈕 -->
   <div class="sel row">    
     <div class="col-2"><a href="?year=<?= $prevYear ?>&month=<?= $prevMonth ?>"><i class="fas fa-angle-left"></i>上月</a></div>
@@ -204,6 +228,8 @@ $holiday=[
     }
     ?>
     </table>
+
+    
 </div>
 
 
