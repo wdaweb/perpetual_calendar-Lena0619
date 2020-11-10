@@ -19,7 +19,6 @@ table, td {
     /* border: 1px solid black; */
     border-collapse: collapse;
     text-align: center;
-    vertical-align: top;
     margin: 0 auto;
     height:100%;
 }
@@ -48,7 +47,7 @@ a:hover {
 }
 
 .container {
-    margin: 100px auto;
+    margin: 50px auto;
     min-width: 750px;
     
     border: 2px solid #7d7f82;
@@ -89,9 +88,16 @@ a:hover {
     overflow: hidden;
 }
 
+.ipt {
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 </style>
 
 <body>
+
 
 <?php
 //定義變數
@@ -99,26 +105,30 @@ date_default_timezone_set('Asia/Taipei'); //默認時區設定為台灣時間
 
 if(isset($_GET['year'])){   //年
     $year = $_GET['year'];
+} else if(isset($_GET['ym'])) {
+    $year = mb_substr($_GET['ym'],0,4);
 } else {
     $year = date('Y');
 }
 
 if(isset($_GET['month'])){   //月
     $month = $_GET['month'];
+} else if(isset($_GET['ym'])) {
+    $month = mb_substr($_GET['ym'],5,2);
 } else {
     $month = date('m');
 }
 
 $eMonth = [         //月份:英文縮寫
-    '1' => 'Jan',
-    '2' => 'Feb',
-    '3' => 'Mar',
-    '4' => 'Apr',
-    '5' => 'May',
-    '6' => 'Jun',
-    '7' => 'Jul',
-    '8' => 'Aug',
-    '9' => 'Sep',
+    '01' => 'Jan',
+    '02' => 'Feb',
+    '03' => 'Mar',
+    '04' => 'Apr',
+    '05' => 'May',
+    '06' => 'Jun',
+    '07' => 'Jul',
+    '08' => 'Aug',
+    '09' => 'Sep',
     '10' => 'Oct',
     '11' => 'Nov',
     '12' => 'Dec'
@@ -171,13 +181,18 @@ $holiday=[
 ];
 ?>
 
+<!-- 年月選單 -->
+<form action="calender222.php" method="GET" class="ipt form-inline">
+  <input type="text" class="form-control mb-2 mr-sm-2" name="ym" placeholder="YYYY-MM">
+  <button type="submit" class="btn btn-info mb-2">Submit</button>
+</form>
+
+
 <div class="container">
 
   <div class="sideBar">
      <img src="https://picsum.photos/500/700/?random=1">
   </div>
-
-
 
     <!-- 跳月跳年按鈕 -->
   <div class="sel row">    
