@@ -32,6 +32,11 @@ td {
     height:90px;
 }
 
+td:hover {
+    background-color: lightgray;
+    border-radius: 50px;
+}
+
 th {
     padding: 30px 0;
 }
