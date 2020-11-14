@@ -92,7 +92,15 @@ a:hover {
     width: 40%;
     overflow: hidden;
 }
-
+.sideBar::after{
+    content:"載入圖片中...";
+    width:100%;
+    text-align:center;
+    line-height:500px;
+    display:block;
+    font-size:20px;
+    font-weight:bolder;
+}
 .ipt {
     display:flex;
     justify-content: center;
@@ -125,15 +133,15 @@ if(isset($_GET['month'])){   //月
 }
 
 $eMonth = [         //月份:英文縮寫
-    '01' => 'Jan',
-    '02' => 'Feb',
-    '03' => 'Mar',
-    '04' => 'Apr',
-    '05' => 'May',
-    '06' => 'Jun',
-    '07' => 'Jul',
-    '08' => 'Aug',
-    '09' => 'Sep',
+    '1' => 'Jan',
+    '2' => 'Feb',
+    '3' => 'Mar',
+    '4' => 'Apr',
+    '5' => 'May',
+    '6' => 'Jun',
+    '7' => 'Jul',
+    '8' => 'Aug',
+    '9' => 'Sep',
     '10' => 'Oct',
     '11' => 'Nov',
     '12' => 'Dec'
@@ -187,15 +195,15 @@ $holiday=[
 ?>
 
 <!-- 年月選單 -->
-<form action="calender222.php" method="GET" class="ipt form-inline">
-  <input type="text" class="form-control mb-2 mr-sm-2" name="ym" placeholder="YYYY-MM">
+<form action="index.php" method="GET" class="ipt form-inline">
+  <input type="text" class="form-control mb-2 mr-sm-2" name="ym" placeholder="YYYY-MM" value="<?=date("Y-m");?>">
   <button type="submit" class="btn btn-info mb-2">Submit</button>
 </form>
 
 
 <div class="container">
 
-  <div class="sideBar">
+  <div class="sideBar" style="width:500px;height:700px">
      <img src="https://picsum.photos/500/700/?random=1">
   </div>
 
